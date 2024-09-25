@@ -4,7 +4,9 @@ from digitalio import DigitalInOut, Direction
 from interface import Interface
 
 class TFTBonnet:
-    def __init__(self):
+    def __init__(self, interface):
+        self.interface = interface
+
         self.state =    [False, False, False, False, False, False, False, False]
         self.oldState = [False, False, False, False, False, False, False, False]
 
@@ -16,8 +18,6 @@ class TFTBonnet:
         self.b = 5
         self.c = 6
         self.d = 7
-
-        self.interface = Interface()
 
         self.button_A = DigitalInOut(board.D5)
         self.button_A.direction = Direction.INPUT
@@ -85,27 +85,3 @@ class TFTBonnet:
             return found[0]
         else:
             return []
-
-    def processUp(self):
-        return
-
-    def processDown(self):
-        return
-
-    def processLeft(self):
-        return
-
-    def processRight(self):
-        return
-
-    def processA(self):
-        return
-
-    def processB(self):
-        return
-
-    def processC(self):
-        return
-
-    def processD(self):
-        return
