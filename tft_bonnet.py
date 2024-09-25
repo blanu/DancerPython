@@ -46,6 +46,7 @@ class TFTBonnet:
 
     def process(self):
         found = self.read()
+        print(found)
         if found == self.up:
             self.interface.processUp()
         elif found == self.down:
