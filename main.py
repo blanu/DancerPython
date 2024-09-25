@@ -8,7 +8,7 @@ from interface import Interface
 class Dancer:
     def __init__(self):
         self.interface = Interface()
-        self.bonnet = TFTBonnet(interface)
+        self.bonnet = TFTBonnet(self.interface)
 
         while True:
             self.bonnet.process()
