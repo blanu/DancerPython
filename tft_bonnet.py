@@ -7,8 +7,8 @@ class TFTBonnet:
     def __init__(self, interface):
         self.interface = interface
 
-        self.state =    [False, False, False, False, False, False, False, False]
-        self.oldState = [False, False, False, False, False, False, False, False]
+        self.state =    [False, False, False, False, False, False, False]
+        self.oldState = [False, False, False, False, False, False, False]
 
         self.up = 0
         self.down = 1
@@ -17,7 +17,6 @@ class TFTBonnet:
         self.a = 4
         self.b = 5
         self.c = 6
-        self.d = 7
 
         self.button_A = DigitalInOut(board.D5)
         self.button_A.direction = Direction.INPUT
@@ -34,7 +33,7 @@ class TFTBonnet:
         self.button_U = DigitalInOut(board.D17)
         self.button_U.direction = Direction.INPUT
 
-        self. button_D = DigitalInOut(board.D22)
+        self.button_D = DigitalInOut(board.D22)
         self.button_D.direction = Direction.INPUT
 
         self.button_C = DigitalInOut(board.D4)
@@ -61,8 +60,6 @@ class TFTBonnet:
             self.interface.processB()
         elif found == self.c:
             self.interface.processC()
-        elif found == self.d:
-            self.interface.processD()
 
     def read(self):
         self.state[self.up] = not self.button_U.value
@@ -72,14 +69,12 @@ class TFTBonnet:
         self.state[self.a] = not self.button_A.value
         self.state[self.b] = not self.button_B.value
         self.state[self.c] = not self.button_C.value
-        self.state[self.d] = not self.button_D.value
 
         found = []
-        for position in [self.up, self.down, self.left, self.right, self.a, self.b, self.c, self.d]:
+        for position in [self.up, self.down, self.left, self.right, self.a, self.b, self.c]:
             if self.state[position] and not self.oldState[position]:
                 found.append(position)
-
-        self.oldState = self.state
+            self.oldState[position] = self.state[position]
 
         if len(found) == 1:
             return found[0]
